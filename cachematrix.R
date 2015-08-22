@@ -3,7 +3,7 @@
 # Routine to compute the inverse of a matrix and retrieve the 
 # inverse from cache
 #
-# Written by: Felipe J Colón-González
+# Written by: Felipe J Colón-González (2015)
 # For any problems with this code, please contact f.colon@uea.ac.uk
 # 
 ###################################################################
@@ -19,15 +19,15 @@
 # object, that can cache its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
-      Inv <- NULL
-      set <- function(y) {
-            x <<- y
-            inv <<- NULL
-      }
-      get <- function() x
-      setInv <- function(inverse) Inv <<- inverse 
-      getInv <- function() Inv
-      list(set=set, get=get, setInv=setInv, getInv=getInv)
+       Inv <- NULL
+       set <- function(y) {
+              x <<- y
+              inv <<- NULL
+       }
+       get <- function() x
+       setInv <- function(inverse) Inv <<- inverse 
+       getInv <- function() Inv
+       list(set=set, get=get, setInv=setInv, getInv=getInv)
 }
 
 
@@ -37,15 +37,39 @@ makeCacheMatrix <- function(x = matrix()) {
 # retrieve its inverse from the cache.
 
 cacheSolve <- function(x, ...) {
-      Inv <- x$getInv()
-      if (!is.null(Inv)){
-            message("Getting cached data")
-            return(Inv)
-      }
-      mat.data <- x$get()
-      Inv <- solve(mat.data, ...)
-      x$setInv(Inv)
-      return(Inv)
+       Inv <- x$getInv()
+       if (!is.null(Inv)){
+              message("Getting cached data")
+              return(Inv)
+       }
+       mat.data <- x$get()
+       Inv <- solve(mat.data, ...)
+       x$setInv(Inv)
+       return(Inv)
 }
+
+# NOT TO RUN
+# Test the script:
+# mymatrix <- matrix(1:4,2,2)
+# matCache <- makeCacheMatrix(mymatrix)
+
+# Get matrix
+# matCache$get()
+#       [,1]   [,2]
+# [1,]    1      3
+# [2,]    2      4
+
+# Get inverse of matrix (not from cache)
+# cacheSolve(matCache)
+#      [,1]    [,2]
+# [1,]   -2     1.5
+# [2,]    1    -0.5
+
+# Get inverse of matrix (from cache)
+# cacheSolve(matCache)
+# Getting cached data
+#      [,1]    [,2]
+# [1,]   -2     1.5
+# [2,]    1    -0.5
 
 # EOF
