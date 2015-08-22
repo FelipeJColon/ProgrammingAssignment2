@@ -1,8 +1,17 @@
-## #################################################################
-## Matrix inversion is usually computationally expensive. Therefore,
-## there may be some gain in caching the inverse of a matrix rather  
-## than computing it repeatedly. 
-## #################################################################
+###################################################################
+# DESCRIPTION
+# Routine to compute the inverse of a matrix and retrieve the 
+# inverse from cache
+#
+# Written by: Felipe J Colón-González
+# For any problems with this code, please contact f.colon@uea.ac.uk
+# 
+###################################################################
+
+# JUSTIFICATION
+# Matrix inversion is usually computationally expensive. Therefore,
+# there may be some gain in caching the inverse of a matrix rather  
+# than computing it repeatedly. 
 
 # This script contains TWO functions
 
